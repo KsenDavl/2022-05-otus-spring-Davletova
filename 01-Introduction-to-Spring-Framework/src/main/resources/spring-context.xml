@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="resourceLoader" class="org.springframework.core.io.DefaultResourceLoader"/>
+
+    <bean id="csvreader" class="ru.otus.spring.davlks.service.impl.CSVResourceReaderImpl">
+        <constructor-arg name="resourceLoader" ref="resourceLoader"/>
+        <constructor-arg name="classpath" value="classpath:quiz.csv"/>
+    </bean>
+
+    <bean id="consoleReader" class="ru.otus.spring.davlks.service.impl.ConsoleReaderImpl"/>
+
+    <bean id="consoleWriter" class="ru.otus.spring.davlks.service.impl.ConsoleWriterImpl"/>
+
+    <bean id="quizService" class="ru.otus.spring.davlks.service.impl.QuizServiceImpl">
+        <constructor-arg name="resourceReader" ref="csvreader" />
+        <constructor-arg name="consoleWriter" ref="consoleWriter"/>
+        <constructor-arg name="consoleReader" ref="consoleReader"/>
+    </bean>
+
+</beans>
