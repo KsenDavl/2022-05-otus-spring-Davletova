@@ -1,29 +1,35 @@
 package ru.otus.spring.davlks.service.impl;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.core.io.DefaultResourceLoader;
+import ru.otus.spring.davlks.model.Question;
+import ru.otus.spring.davlks.model.Quiz;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-//
+import java.util.List;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = "classpath:spring-test-context.xml")
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DisplayName("Класс CSVResourceReader")
-public class CSVResourceReaderImplTest {
-    
-    private CSVResourceReaderImpl csvResourceReader;
+class CSVResourceReaderImplTest {
 
-    public CSVResourceReaderImplTest(CSVResourceReaderImpl csvResourceReader) {
-        this.csvResourceReader = csvResourceReader;
+    private static CSVResourceReaderImpl csvResourceReader;
+
+    @BeforeAll
+    static void initializeService() {
+        csvResourceReader = new CSVResourceReaderImpl(new DefaultResourceLoader(), "classpath:testQuiz.csv");
     }
 
     @Test
     @DisplayName("корректно считывает викторину")
     void whenResourceLoaderReadCsvGetNotEmptyQuizObject()  {
-        assertNotNull(csvResourceReader);
-        //Quiz quiz = csvResourceReader.readQuiz();
+        Quiz quiz = csvResourceReader.readQuiz();
+        List<Question> questions = quiz.getQuestions();
+        assertEquals(1, questions.size());
+
+        Question firstQuestion = questions.get(0);
+        assertEquals(4, firstQuestion.getAnswers().length);
+        assertEquals("c", firstQuestion.getCorrectAnswer());
     }
 }
