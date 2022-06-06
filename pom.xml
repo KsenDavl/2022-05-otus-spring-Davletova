@@ -12,6 +12,7 @@
 
   <modules>
     <module>01-Introduction-to-Spring-Framework</module>
+    <module>02-Spring-Application-Configuration</module>
   </modules>
 
   <properties>
