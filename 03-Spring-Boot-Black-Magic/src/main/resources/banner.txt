@@ -1,0 +1,12 @@
+
+${AnsiBackground.BRIGHT_WHITE}
+${AnsiColor.GREEN} ____ ____ ____ ____ ____ ____ ____ ____ ____ ____
+${AnsiColor.GREEN}||S |||P |||R |||I |||N |||G |||B |||O |||O |||T ||
+${AnsiColor.GREEN}||__|||__|||__|||__|||__|||__|||__|||__|||__|||__||
+${AnsiColor.GREEN}|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+
+${AnsiBackground.DEFAULT}
+${AnsiColor.DEFAULT}
+
+
+
