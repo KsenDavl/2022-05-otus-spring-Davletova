@@ -2,9 +2,7 @@ package ru.otus.spring.davlks.service.impl;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-import ru.otus.spring.davlks.common.Entries;
 import ru.otus.spring.davlks.common.LocaleHandler;
 import ru.otus.spring.davlks.common.QuizResults;
 import ru.otus.spring.davlks.model.Question;
@@ -25,33 +23,27 @@ public class QuizServiceImpl implements QuizService {
 
     private ConsoleService consoleService;
     private CSVResourceReader resourceReader;
-    private MessageSource messageSource;
-    private LocaleHandler localeHandler;
 
     public QuizServiceImpl(@Value("${quiz.questions.required}") int correctAnswersRequired,
                            @Value("${quiz.questions.attempts}") int attempts,
                            ConsoleService consoleService,
-                           CSVResourceReader resourceReader,
-                           MessageSource messageSource,
-                           LocaleHandler localeHandler) {
+                           CSVResourceReader resourceReader) {
         this.correctAnswersRequired = correctAnswersRequired;
         this.attempts = attempts;
         this.consoleService = consoleService;
         this.resourceReader = resourceReader;
-        this.messageSource = messageSource;
-        this.localeHandler = localeHandler;
     }
 
     @Override
     public void runQuiz() {
-        consoleService.write(localeHandler.getMessage("greeting"));
+        consoleService.write(LocaleHandler.getMessage("greeting"));
         String name = consoleService.read();
-        consoleService.write(name + ", " + Entries.QUIZ.getEntryText());
+        consoleService.write(String.format(LocaleHandler.getMessage("entry"), name));
         Quiz quiz = getQuiz();
         int correctAnswers = askQuestionsAndCountCorrectAnswers(quiz);
-        consoleService.write(String.format(localeHandler.getMessage("correct-answers-amount"), name,  correctAnswers));
+        consoleService.write(String.format(LocaleHandler.getMessage("correct-answers-amount"), name,  correctAnswers));
         QuizResults result = QuizResults.getResult(quiz.getQuestions().size(), correctAnswers, correctAnswersRequired);
-        consoleService.write(result.getDescription());
+        consoleService.write(LocaleHandler.getMessage(result.toString()));
     }
 
     @Override
@@ -85,7 +77,7 @@ public class QuizServiceImpl implements QuizService {
         for (Question question : quiz.getQuestions()) {
             int attemptsToAnswer = attempts;
             consoleService.writeQuestionAndAnswers(question);
-            consoleService.write("\n" + localeHandler.getMessage("type-answer"));
+            consoleService.write("\n" + LocaleHandler.getMessage("type-answer"));
             String answer = getAnswer();
 
             if (isAnswerCorrect(answer, question.getCorrectAnswer())) {
@@ -93,11 +85,11 @@ public class QuizServiceImpl implements QuizService {
             } else {
                 while (!isAnswerCorrect(answer, question.getCorrectAnswer()) && attemptsToAnswer > 1) {
                     attemptsToAnswer--;
-                    consoleService.write(String.format(localeHandler.getMessage("incorrect-answer"),  attemptsToAnswer));
+                    consoleService.write(String.format(LocaleHandler.getMessage("incorrect-answer"),  attemptsToAnswer));
                     answer = getAnswer();
                 }
             }
-            consoleService.write(localeHandler.getMessage("correct-answer") + question.getCorrectAnswer());
+            consoleService.write(LocaleHandler.getMessage("correct-answer") + question.getCorrectAnswer());
         }
         return correctAnswers;
     }
@@ -109,7 +101,7 @@ public class QuizServiceImpl implements QuizService {
     private String getAnswer() {
         String answer = consoleService.read();
         while (!isAnswerValid(answer)) {
-            consoleService.write(localeHandler.getMessage("answer-format"));
+            consoleService.write(LocaleHandler.getMessage("answer-format"));
             answer = consoleService.read();
         }
         return answer;

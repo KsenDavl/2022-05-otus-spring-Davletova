@@ -36,16 +36,17 @@ class QuizServiceImplTest {
         firstLine.add("d");
         csvAsList.add(firstLine);
         given(resourceReader.getCsvAsList()).willReturn(csvAsList);
+
     }
 
-//    @Test
-//    @DisplayName("получает викторину из списка вопросов")
-//    void getQuiz() {
-//        QuizServiceImpl quizService = new QuizServiceImpl(0, 0,
-//                consoleService, resourceReader);
-//        Quiz quiz = quizService.getQuiz();
-//        Question firstQuestion = quiz.getQuestions().get(0);
-//
-//        assertEquals("d", firstQuestion.getCorrectAnswer());
-//    }
+    @Test
+    @DisplayName("получает викторину из списка вопросов")
+    void getQuiz() {
+        QuizServiceImpl quizService = new QuizServiceImpl(0, 0,
+                consoleService, resourceReader);
+        Quiz quiz = quizService.getQuiz();
+        Question firstQuestion = quiz.getQuestions().get(0);
+
+        assertEquals("d", firstQuestion.getCorrectAnswer());
+    }
 }

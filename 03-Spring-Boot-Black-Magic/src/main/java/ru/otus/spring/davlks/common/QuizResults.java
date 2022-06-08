@@ -2,19 +2,9 @@ package ru.otus.spring.davlks.common;
 
 public enum QuizResults {
 
-    EXCELLENT("You've done an excellent job! All answers are correct!"),
-    GOOD("Good job! You've passed the test!"),
-    POOR("Not bad, but you should try again and improve your result!");
-
-    private final String description;
-
-    QuizResults(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
+    EXCELLENT,
+    GOOD,
+    POOR;
 
     public static QuizResults getResult(int questionsNumber, int correctAnswers, int correctAnswersRequired) {
         if (questionsNumber == correctAnswers) {
@@ -24,5 +14,10 @@ public enum QuizResults {
             return QuizResults.POOR;
         }
         return QuizResults.GOOD;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
     }
 }

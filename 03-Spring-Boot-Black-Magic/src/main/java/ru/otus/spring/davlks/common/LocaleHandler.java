@@ -9,17 +9,17 @@ import java.util.Locale;
 @Configuration
 public class LocaleHandler {
 
-    private  String language;
+    private static String language;
 
-    private  MessageSource messageSource;
+    private static MessageSource messageSource;
 
     public LocaleHandler(@Value("${quiz.language}") String language,
                          MessageSource messageSource) {
-        this.language = language;
-        this.messageSource = messageSource;
+        LocaleHandler.language = language;
+        LocaleHandler.messageSource = messageSource;
     }
 
-    public String getMessage(String code) {
+    public static String getMessage(String code) {
         return messageSource.getMessage(code, null, new Locale(language));
     }
 }

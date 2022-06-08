@@ -2,7 +2,6 @@ package ru.otus.spring.davlks.service.impl;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import lombok.Data;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -15,22 +14,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Service
 public class CSVResourceReaderImpl implements CSVResourceReader {
 
     private ResourceLoader resourceLoader;
 
-    private LocaleHandler localeHandler;
-
-    public CSVResourceReaderImpl(ResourceLoader resourceLoader, LocaleHandler localeHandler) {
+    public CSVResourceReaderImpl(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
-        this.localeHandler = localeHandler;
     }
 
     @Override
     public List<List<String>> getCsvAsList() {
-        String classpath = localeHandler.getMessage("csv-classpath");
+        String classpath = LocaleHandler.getMessage("csv-classpath");
         Resource resource = resourceLoader.getResource(classpath);
         List<List<String>> csvAsList = new ArrayList<>();
 

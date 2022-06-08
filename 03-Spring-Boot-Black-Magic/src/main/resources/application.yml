@@ -4,4 +4,4 @@ quiz:
   questions:
     required: 3
     attempts: 2
-  language: en_EN
+  language: ru_RU

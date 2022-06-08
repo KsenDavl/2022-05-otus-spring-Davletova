@@ -1,24 +1,38 @@
 package ru.otus.spring.davlks.service.impl;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.DefaultResourceLoader;
+import ru.otus.spring.davlks.common.LocaleHandler;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.given;
 
 @DisplayName("Класс CSVResourceReader")
+@ExtendWith(MockitoExtension.class)
 class CSVResourceReaderImplTest {
 
-    private static CSVResourceReaderImpl csvResourceReader;
+    @Mock
+    private LocaleHandler localeHandler;
+    @Mock
+    private MessageSource messageSource;
 
-//    @BeforeAll
-//    static void initializeService() {
-//        csvResourceReader = new CSVResourceReaderImpl("classpath:testQuiz.csv",
-//                new DefaultResourceLoader());
-//    }
+    private CSVResourceReaderImpl csvResourceReader;
+
+     @BeforeEach
+     void init() {
+        csvResourceReader = new CSVResourceReaderImpl(new DefaultResourceLoader());
+        localeHandler = new LocaleHandler("", messageSource);
+
+        given(LocaleHandler.getMessage("csv-classpath")).willReturn("classpath:testQuiz.csv");
+    }
 
     @Test
     @DisplayName("корректно считывает csv файл")
