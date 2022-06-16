@@ -1,0 +1,6 @@
+quiz:
+  file:
+    path: "classpath:testQuiz.csv"
+  questions:
+    required: 3
+    attempts: 2
