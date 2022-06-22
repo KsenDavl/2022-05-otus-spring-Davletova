@@ -1,0 +1,7 @@
+quiz:
+  file:
+    path: "classpath:quiz.csv"
+  questions:
+    required: 3
+    attempts: 2
+  language: ru_RU
