@@ -1,0 +1,1 @@
+insert into authors (last_name, first_name) values('Stephen', 'King');
