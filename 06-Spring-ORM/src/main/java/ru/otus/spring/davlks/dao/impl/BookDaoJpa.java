@@ -10,8 +10,6 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-@NamedEntityGraph(name = "otus-student-avatars-entity-graph",
-        attributeNodes = {@NamedAttributeNode("avatar")})
 public class BookDaoJpa implements BookDao {
 
     @PersistenceContext
