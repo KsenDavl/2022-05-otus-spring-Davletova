@@ -2,7 +2,6 @@ package ru.otus.spring.davlks.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.davlks.dao.CommentDao;
 import ru.otus.spring.davlks.entity.Book;
 import ru.otus.spring.davlks.entity.Comment;
@@ -10,6 +9,7 @@ import ru.otus.spring.davlks.service.BookService;
 import ru.otus.spring.davlks.service.ConsoleService;
 import ru.otus.spring.davlks.service.CommentService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -58,8 +58,7 @@ public class CommentServiceImpl implements CommentService {
         consoleService.write("Type new text of the comment:");
         String text = consoleService.read();
 
-        Comment comment  = new Comment();
-        comment.setId(id);
+        Comment comment = commentDao.getCommentById(id);
         comment.setText(text);
         comment = commentDao.updateCommentText(comment);
 
@@ -75,6 +74,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @javax.transaction.Transactional
     public List<Comment> getAllBookComments() {
         List<Book> books = bookService.getAllBooks();
         if (books == null || books.isEmpty()) {
@@ -84,7 +84,8 @@ public class CommentServiceImpl implements CommentService {
         consoleService.write("Choose the book and type its id:");
         bookService.writeListOfBooks(books);
         long id = Long.parseLong(consoleService.read());
-        List<Comment> comments = commentDao.getAllCommentsByBookId(id);
+        Book book = bookService.getBookById(id);
+        List<Comment> comments = book.getComments();
         comments.forEach(comment -> consoleService.write(comment.toString()));
         return comments;
     }

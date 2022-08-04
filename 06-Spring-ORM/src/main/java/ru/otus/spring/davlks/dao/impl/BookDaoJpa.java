@@ -1,14 +1,16 @@
 package ru.otus.spring.davlks.dao.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.davlks.dao.BookDao;
 import ru.otus.spring.davlks.entity.Book;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class BookDaoJpa implements BookDao {
 
@@ -38,26 +40,14 @@ public class BookDaoJpa implements BookDao {
 
     @Override
     public Book updateBook(Book book) {
-        Query query = em.createQuery("update Book b " +
-                "set b.title = :title, " +
-                "b.author.id = :author, " +
-                "b.genre.id = :genre " +
-                "where b.id = :id");
-        query.setParameter("title", book.getTitle());
-        query.setParameter("author", book.getAuthor().getId());
-        query.setParameter("genre", book.getGenre().getId());
-        query.setParameter("id", book.getId());
-        query.executeUpdate();
+       em.merge(book);
         return book;
     }
 
     @Override
     public void deleteBook(long id) {
-        Query query = em.createQuery("delete " +
-                "from Book b " +
-                "where b.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+       Book book = em.find(Book.class, id);
+       em.remove(book);
     }
 
 }

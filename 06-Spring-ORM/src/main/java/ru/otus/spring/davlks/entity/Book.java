@@ -29,12 +29,12 @@ public class Book {
     @JoinColumn(name = "genre")
     private Genre genre;
 
-    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.REMOVE, mappedBy = "book", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.REMOVE, mappedBy = "book", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     @Override
     public String toString() {
-        return String.format("%d. \"%s\", %s, by %s %s \nComments: \n%s",
-                id, title, genre.getName(), author.getLastName(), author.getFirstName(), comments);
+        return String.format("%d. \"%s\", %s, by %s %s",
+                id, title, genre.getName(), author.getLastName(), author.getFirstName());
     }
 }

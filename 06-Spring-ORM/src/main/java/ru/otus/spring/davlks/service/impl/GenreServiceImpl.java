@@ -44,7 +44,8 @@ public class GenreServiceImpl implements GenreService {
         consoleService.write("Type new name of the genre:");
         String name = consoleService.read();
 
-        Genre genre  = new Genre(id, name);
+        Genre genre  = genreDao.getGenreById(id);
+        genre.setName(name);
         genre = genreDao.updateGenre(genre);
 
         consoleService.write("Updated: " + genre.toString());

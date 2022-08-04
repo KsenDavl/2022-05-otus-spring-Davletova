@@ -50,8 +50,7 @@ public class AuthorServiceImpl implements AuthorService {
         consoleService.write("Type new first name of the author:");
         String firstName = consoleService.read();
 
-        Author author = new Author();
-        author.setId(id);
+        Author author = authorDao.getAuthorById(id);
         author.setLastName(lastName);
         author.setFirstName(firstName);
         author = authorDao.updateAuthor(author);

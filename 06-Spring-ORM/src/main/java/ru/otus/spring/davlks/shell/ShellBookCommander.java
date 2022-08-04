@@ -22,7 +22,8 @@ class ShellBookCommander {
     @ShellMethod(value = "Get book/author/title by id", key = {"g", "get"})
     public void get(String targetObject, long id) {
         if ("book".equals(targetObject)) {
-            bookService.getBookById(id);
+            Book book = bookService.getBookById(id);
+            consoleService.write("Got: " + book.toString());
         } else if ("author".equals(targetObject)) {
             authorService.getAuthorById(id);
         } else if ("genre".equals(targetObject)) {
@@ -85,7 +86,7 @@ class ShellBookCommander {
         if ("book".equals(targetObject)) {
             List<Book> books = bookService.getAllBooks();
             bookService.writeListOfBooks(books);
-        } else if ("author".equals(targetObject)) {
+        }  else if ("author".equals(targetObject)) {
             authorService.getAllAuthors();
         } else if ("genre".equals(targetObject)) {
             genreService.getAllGenres();
@@ -95,6 +96,5 @@ class ShellBookCommander {
             consoleService.write("Command should look like 'all book'");
         }
     }
-
 
 }

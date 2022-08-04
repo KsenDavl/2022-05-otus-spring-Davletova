@@ -2,7 +2,6 @@ package ru.otus.spring.davlks.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.davlks.dao.BookDao;
 import ru.otus.spring.davlks.entity.Author;
 import ru.otus.spring.davlks.entity.Book;
@@ -12,6 +11,7 @@ import ru.otus.spring.davlks.service.BookService;
 import ru.otus.spring.davlks.service.ConsoleService;
 import ru.otus.spring.davlks.service.GenreService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -45,7 +45,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBookById(long id) {
         Book book = bookDao.getBookById(id);
-        consoleService.write("Got: " + book.toString());
         return book;
     }
 

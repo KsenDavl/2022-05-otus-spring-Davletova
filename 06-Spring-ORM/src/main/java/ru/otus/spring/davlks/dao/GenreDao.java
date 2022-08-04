@@ -1,11 +1,9 @@
 package ru.otus.spring.davlks.dao;
 
-import org.springframework.stereotype.Repository;
 import ru.otus.spring.davlks.entity.Genre;
 
 import java.util.List;
 
-@Repository
 public interface GenreDao {
 
     Genre getGenreById(long id);

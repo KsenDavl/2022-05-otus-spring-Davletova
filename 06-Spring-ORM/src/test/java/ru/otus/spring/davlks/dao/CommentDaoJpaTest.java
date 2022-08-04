@@ -55,13 +55,6 @@ class CommentDaoJpaTest {
     }
 
     @Test
-    @DisplayName("получает список всех комментариев к книге")
-    void shouldReturnExpectedCommentsList() {
-        List<Comment> actualCommentList = commentDao.getAllCommentsByBookId(EXISTING_COMMENT_BOOK_ID);
-        assertThat(actualCommentList).isNotNull().hasSize(EXPECTED_NUMBER_OF_EXISTING_COMMENTS);
-    }
-
-    @Test
     @DisplayName("удаляет запись")
     void shouldDeleteCommentCorrectly() {
         Comment existingComment = em.find(Comment.class, EXISTING_COMMENT_ID);

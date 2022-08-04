@@ -1,17 +1,16 @@
 package ru.otus.spring.davlks.dao.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.davlks.dao.GenreDao;
 import ru.otus.spring.davlks.entity.Genre;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class GenreDaoJpa implements GenreDao {
 
@@ -41,22 +40,14 @@ public class GenreDaoJpa implements GenreDao {
 
     @Override
     public Genre updateGenre(Genre genre) {
-        Query query = em.createQuery("update Genre g " +
-                "set g.name = :name " +
-                "where g.id = :id");
-        query.setParameter("name", genre.getName());
-        query.setParameter("id", genre.getId());
-        query.executeUpdate();
+        em.merge(genre);
         return genre;
     }
 
     @Override
     public void deleteGenreById(long id) {
-        Query query = em.createQuery("delete " +
-                "from Genre g " +
-                "where g.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+       Genre genre = em.find(Genre.class, id);
+       em.remove(genre);
     }
 
 }
