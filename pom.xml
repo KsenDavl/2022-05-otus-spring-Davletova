@@ -17,6 +17,7 @@
     <module>04-Spring-Shell</module>
     <module>05-Spring-JDBC</module>
     <module>06-Spring-ORM</module>
+    <module>07-Spring-Data</module>
   </modules>
 
   <properties>
