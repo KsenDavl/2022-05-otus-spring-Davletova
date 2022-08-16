@@ -11,7 +11,6 @@ import ru.otus.spring.davlks.service.BookService;
 import ru.otus.spring.davlks.service.ConsoleService;
 import ru.otus.spring.davlks.service.GenreService;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -25,7 +24,6 @@ public class BookServiceImpl implements BookService {
     private final BookDao bookDao;
 
     @Override
-    @Transactional
     public void addBook() {
         consoleService.write("Type the title of the book:");
         String title = consoleService.read();
@@ -44,12 +42,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(long id) {
-        Book book = bookDao.findById(id);
-        return book;
+        return bookDao.findById(id).orElseThrow();
     }
 
     @Override
-    @Transactional
     public Book updateBook(long id) {
         Book book = getBookById(id);
 
@@ -69,7 +65,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public void deleteBookById(long id) {
         bookDao.deleteById(id);
         consoleService.write("Deleted book with id = " + id);

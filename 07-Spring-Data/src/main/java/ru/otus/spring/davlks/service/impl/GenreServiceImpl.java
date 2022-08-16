@@ -7,7 +7,6 @@ import ru.otus.spring.davlks.entity.Genre;
 import ru.otus.spring.davlks.service.ConsoleService;
 import ru.otus.spring.davlks.service.GenreService;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,7 +17,6 @@ public class GenreServiceImpl implements GenreService {
     private final ConsoleService consoleService;
 
     @Override
-    @Transactional
     public Genre addGenre() {
         consoleService.write("Type the name of the genre:");
         String name = consoleService.read();
@@ -32,19 +30,18 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public Genre getGenreById(long id) {
-        Genre genre = genreDao.findById(id);
+        Genre genre = genreDao.findById(id).orElseThrow();
         consoleService.write("Got: " + genre.toString());
         return genre;
     }
 
     @Override
-    @Transactional
     public Genre updateGenre(long id) {
 
         consoleService.write("Type new name of the genre:");
         String name = consoleService.read();
 
-        Genre genre  = genreDao.findById(id);
+        Genre genre  = genreDao.findById(id).orElseThrow();
         genre.setName(name);
         genre = genreDao.save(genre);
 
@@ -53,7 +50,6 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @Transactional
     public void deleteGenreById(long id) {
         genreDao.deleteById(id);
         consoleService.write("Deleted genre with id = " + id);

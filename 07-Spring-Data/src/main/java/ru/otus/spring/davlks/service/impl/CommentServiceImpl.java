@@ -9,7 +9,6 @@ import ru.otus.spring.davlks.service.BookService;
 import ru.otus.spring.davlks.service.CommentService;
 import ru.otus.spring.davlks.service.ConsoleService;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,7 +20,6 @@ public class CommentServiceImpl implements CommentService {
     private final ConsoleService consoleService;
 
     @Override
-    @Transactional
     public void addComment() {
         List<Book> books = bookService.getAllBooks();
         if (books == null || books.isEmpty()) {
@@ -47,18 +45,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment getCommentById(long id) {
-        Comment comment = commentDao.findById(id);
+        Comment comment = commentDao.findById(id).orElseThrow();
         consoleService.write("Got: " + comment.toString());
         return comment;
     }
 
     @Override
-    @Transactional
     public Comment updateCommentText(long id) {
         consoleService.write("Type new text of the comment:");
         String text = consoleService.read();
 
-        Comment comment = commentDao.findById(id);
+        Comment comment = commentDao.findById(id).orElseThrow();
         comment.setText(text);
         comment = commentDao.save(comment);
 
@@ -67,14 +64,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public void deleteCommentById(long id) {
         commentDao.deleteById(id);
         consoleService.write("Deleted comment with id = " + id);
     }
 
     @Override
-    @javax.transaction.Transactional
     public List<Comment> getAllBookComments() {
         List<Book> books = bookService.getAllBooks();
         if (books == null || books.isEmpty()) {

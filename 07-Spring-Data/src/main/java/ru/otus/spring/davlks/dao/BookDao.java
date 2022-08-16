@@ -7,12 +7,4 @@ import ru.otus.spring.davlks.entity.Book;
 import java.util.List;
 
 public interface BookDao extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
-
-    Book findById(long id);
-
-    List<Book> findAll();
-
-    Book save(Book book);
-
-    void deleteById(long id);
 }
