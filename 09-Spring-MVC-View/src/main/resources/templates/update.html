@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Person edition -->
+<form id="update-form" action="update.html" th:method="post" th:action="@{/book/add}" th:object="${book}">
+    <h3>Book Info:</h3>
+
+    <div class="row">
+        <label for="id-input">ID:</label>
+        <input id="id-input" type="text" name="id" readonly="readonly" value="1" th:value="*{id}"/>
+    </div>
+
+    <div class="row">
+        <label for="book-title-input">Title: </label>
+        <input id="book-title-input" name="title" type="text" value="It" th:value="*{title}"/>
+    </div>
+
+    <div class="row">
+        <label for="book-author-last-input">Author's lastname: </label>
+        <input id="book-author-last-input" name="authorLastName" type="text" value="King"
+               th:value="${book.author.lastName}"/>
+        <label for="book-author-first-input">Author's firstName: </label>
+        <input id="book-author-first-input" name="authorFirstName" type="text" value="Stephen"
+               th:value="${book.author.firstName}"/>
+    </div>
+
+    <div class="row">
+        <label for="book-genre-input">Genre: </label>
+        <input id="book-genre-input" name="genre" type="text" value="Horror" th:value="*{genre.name}"/>
+    </div>
+
+    <div class="row">
+        <button type="submit">Save</button>
+        <a href="list.html" th:href="@{/book/all}"><button type="button">Cancel</button></a>
+    </div>
+</form>
+
+</body>
+</html>
