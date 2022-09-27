@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface BookService {
 
-    void addBook(Book book);
+    BookDto saveBook(BookDto bookDto);
 
     Book getBookById(long id);
-
-    Book updateBook(Book book);
 
     void deleteBookById(long id);
 
     List<Book> getAllBooks();
 
     Book mapBookDtoToBook(BookDto bookDTO);
+
+    BookDto mapBookToBookDto(Book book);
 }

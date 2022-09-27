@@ -46,13 +46,13 @@
     <tr th:each="book : ${books}">
         <td th:text="${book.id}">1</td>
         <td th:text="${book.title}">It</td>
-        <td th:text="${book.genre.name}">Horror</td>
-        <td th:text="${book.author.lastName} + ' ' + ${book.author.firstName}">Stephen King</td>
+        <td th:text="${book.genre}">Horror</td>
+        <td th:text="${book.authorLastName} + ' ' + ${book.authorFirstName}">Stephen King</td>
 
         <td>
-            <ul><a href="update.html" th:href="@{/book/update(id=${book.id})}">edit</a></ul>
-            <ul><a href="update.html" th:href="@{/book/delete(id=${book.id})}">delete</a></ul>
-            <ul><a href="update.html" th:href="@{/comment/all(bookId=${book.id})}">comments</a></ul>
+            <ul><a href="save.html" th:href="@{/book/save/{id}(id=${book.id})}">edit</a></ul>
+            <ul><a href="save.html" th:href="@{/book/delete(id=${book.id})}">delete</a></ul>
+            <ul><a href="save.html" th:href="@{/comment/all(bookId=${book.id})}">comments</a></ul>
         </td>
     </tr>
     </tbody>
@@ -61,7 +61,7 @@
 
 <div>
     <button type="button" >
-        <a href="Add a book" th:href="@{/book/add}" th:text="Add"></a>
+        <a href="Add a book" th:href="@{/book/save}" th:text="Add"></a>
     </button>
 </div>
 

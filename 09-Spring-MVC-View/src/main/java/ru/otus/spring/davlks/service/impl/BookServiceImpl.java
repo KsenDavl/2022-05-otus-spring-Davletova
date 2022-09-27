@@ -23,18 +23,14 @@ public class BookServiceImpl implements BookService {
     private final BookDao bookDao;
 
     @Override
-    public void addBook(Book book) {
-        bookDao.save(book);
+    public BookDto saveBook(BookDto bookDto) {
+        Book book = bookDao.save(mapBookDtoToBook(bookDto));
+        return mapBookToBookDto(book);
     }
 
     @Override
     public Book getBookById(long id) {
         return bookDao.findById(id).orElseThrow();
-    }
-
-    @Override
-    public Book updateBook(Book book) {
-        return bookDao.save(book);
     }
 
     @Override
@@ -62,6 +58,18 @@ public class BookServiceImpl implements BookService {
         book.setAuthor(author);
 
         return book;
+    }
+
+    @Override
+    public BookDto mapBookToBookDto(Book book) {
+        BookDto bookDto = new BookDto();
+        bookDto.setId(book.getId());
+        bookDto.setTitle(book.getTitle());
+        bookDto.setGenre(book.getGenre().getName());
+        bookDto.setAuthorFirstName(book.getAuthor().getFirstName());
+        bookDto.setAuthorLastName(book.getAuthor().getLastName());
+
+        return bookDto;
     }
 
 }
