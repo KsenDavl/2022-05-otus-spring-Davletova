@@ -51,10 +51,10 @@ public class BookServiceImpl implements BookService {
         }
         book.setTitle(bookDTO.getTitle());
 
-        Genre genre = genreService.getExistingOrAdd(bookDTO.getGenre());
+        Genre genre = genreService.getGenreById(bookDTO.getGenre().getId());
         book.setGenre(genre);
 
-        Author author = authorService.getExistingOrAdd(bookDTO.getAuthorLastName(), bookDTO.getAuthorFirstName());
+        Author author = authorService.getAuthorById(bookDTO.getAuthor().getId());
         book.setAuthor(author);
 
         return book;
@@ -65,9 +65,8 @@ public class BookServiceImpl implements BookService {
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
         bookDto.setTitle(book.getTitle());
-        bookDto.setGenre(book.getGenre().getName());
-        bookDto.setAuthorFirstName(book.getAuthor().getFirstName());
-        bookDto.setAuthorLastName(book.getAuthor().getLastName());
+        bookDto.setGenre(book.getGenre());
+        bookDto.setAuthor(book.getAuthor());
 
         return bookDto;
     }

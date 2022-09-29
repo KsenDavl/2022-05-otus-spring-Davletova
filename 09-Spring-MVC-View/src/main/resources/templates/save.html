@@ -25,7 +25,7 @@
 <body>
 
 <!-- Person edition -->
-<form id="update-form" action="save.html" th:method="post" th:action="@{/book/save}" th:object="${bookDto}">
+<form id="update-form" action="save.html" th:method="post" th:action="@{/book/save}" th:object="${bookDto} ">
     <h3>Book Info:</h3>
 
     <div class="row" th:if="${bookDto.id != null}">
@@ -39,25 +39,17 @@
     </div>
 
     <div class="row">
-        <label for="book-author-last-input">Author's lastname: </label>
-        <input id="book-author-last-input" name="authorLastName" type="text" value="King"
-               th:value="*{authorLastName}"/>
-        <label for="book-author-first-input">Author's firstName: </label>
-        <input id="book-author-first-input" name="authorFirstName" type="text" value="Stephen"
-               th:value="*{authorFirstName}"/>
+        <label for="author-input">Author:</label>
+        <select class="form-control" th:field="*{author.id}" id="author-input">
+            <option value="0">select author</option>
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.lastName} + ' ' + ${author.firstName}"></option>
+        </select>
     </div>
-
     <div class="row">
-        <label for="book-genre-input">Genre: </label>
-        <select id="book-genre-input" name="genre">
-            <option selected="selected" value="1">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Dystopia">Dystopia</option>
-            <option value="Science fiction">Science fiction</option>
-            <option value="Fantasy">Fantasy</option>
-            <option value="Detective">Detective</option>
-            <option value="Classic">Classic</option>
-            <option value="Horror">Classic</option>
+        <label for="genre-input">Genre:</label>
+        <select class="form-control" th:field="*{genre.id}" id="genre-input">
+            <option value="0">select genre</option>
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
         </select>
     </div>
 

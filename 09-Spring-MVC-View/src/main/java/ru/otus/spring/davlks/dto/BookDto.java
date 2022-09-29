@@ -1,6 +1,8 @@
 package ru.otus.spring.davlks.dto;
 
 import lombok.Data;
+import ru.otus.spring.davlks.entity.Author;
+import ru.otus.spring.davlks.entity.Genre;
 
 @Data
 public class BookDto {
@@ -9,10 +11,8 @@ public class BookDto {
 
     private String title;
 
-    private String authorLastName;
+    private Author author;
 
-    private String authorFirstName;
-
-    private String genre;
+    private Genre genre;
 
 }

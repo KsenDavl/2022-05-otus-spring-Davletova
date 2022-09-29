@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.davlks.dto.BookDto;
+import ru.otus.spring.davlks.service.AuthorService;
 import ru.otus.spring.davlks.service.BookService;
+import ru.otus.spring.davlks.service.GenreService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +17,13 @@ import java.util.stream.Collectors;
 public class BookController {
 
     private final BookService bookService;
+    private final GenreService genreService;
+    private final AuthorService authorService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, GenreService genreService, AuthorService authorService) {
         this.bookService = bookService;
+        this.genreService = genreService;
+        this.authorService = authorService;
     }
 
     @GetMapping("/all")
@@ -31,14 +37,20 @@ public class BookController {
     @GetMapping("/save")
     public String saveBook(Model model) {
         BookDto bookDto = new BookDto();
+
         model.addAttribute("bookDto", bookDto);
+        model.addAttribute("genres", genreService.getAllGenres());
+        model.addAttribute("authors", authorService.getAllAuthors());
         return "save";
     }
 
     @GetMapping("/save/{id}")
     public String saveBook(@PathVariable Long id, Model model) {
         BookDto bookDto = bookService.mapBookToBookDto(bookService.getBookById(id));
+
         model.addAttribute("bookDto", bookDto);
+        model.addAttribute("genres", genreService.getAllGenres());
+        model.addAttribute("authors", authorService.getAllAuthors());
         return "save";
     }
 
