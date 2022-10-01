@@ -19,6 +19,7 @@
     <module>06-Spring-ORM</module>
     <module>07-Spring-Data</module>
     <module>09-Spring-MVC-View</module>
+    <module>10-Spring-AJAX</module>
   </modules>
 
   <properties>
