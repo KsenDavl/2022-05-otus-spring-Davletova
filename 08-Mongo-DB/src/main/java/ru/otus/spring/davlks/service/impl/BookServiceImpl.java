@@ -65,6 +65,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book updateBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @Override
     public void deleteBookById(String id) {
         bookRepository.deleteById(id);
         consoleService.write("Deleted book with id = " + id);

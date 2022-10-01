@@ -28,9 +28,7 @@ class ShellBookCommander {
             authorService.getAuthorById(id);
         } else if ("genre".equals(targetObject)) {
             genreService.getGenreById(id);
-        } else if ("comment".equals(targetObject)) {
-            commentService.getCommentById(id);
-        }else {
+        } else {
             consoleService.write("Command should look like 'get book 3'");
         }
 
@@ -59,8 +57,6 @@ class ShellBookCommander {
             authorService.deleteAuthorById(id);
         } else if ("genre".equals(targetObject)) {
             genreService.deleteGenreById(id);
-        } else if ("comment".equals(targetObject)) {
-            commentService.deleteCommentById(id);
         } else {
             consoleService.write("Command should look like 'delete book 4'");
         }
@@ -74,8 +70,6 @@ class ShellBookCommander {
             authorService.updateAuthor(id);
         } else if ("genre".equals(targetObject)) {
             genreService.updateGenre(id);
-        } else if ("comment".equals(targetObject)) {
-            commentService.updateCommentText(id);
         } else {
             consoleService.write("Command should look like 'update book 5'");
         }
