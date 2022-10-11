@@ -21,6 +21,7 @@
     <module>08-Mongo-DB</module>
     <module>09-Spring-MVC-View</module>
     <module>10-Spring-AJAX</module>
+    <module>12-Spring-Security</module>
   </modules>
 
   <properties>
