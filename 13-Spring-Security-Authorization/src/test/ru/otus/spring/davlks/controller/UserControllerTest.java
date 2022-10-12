@@ -24,13 +24,16 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
-
-    @WithMockUser(
-            username = "admin"
-    )
     @Test
-    public void shouldGetOkOnPublicStartPage() throws Exception {
+    public void shouldGetOkOnStartPageWhenNotAuthenticated() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void shouldGetRedirectionOnSuccessPage() throws Exception {
+        mockMvc.perform(get("/success"))
+                .andExpect(status().is3xxRedirection());
     }
 }

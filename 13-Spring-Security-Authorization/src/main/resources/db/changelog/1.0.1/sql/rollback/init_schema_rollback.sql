@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS books;
+DROP SEQUENCE IF EXISTS books_id_seq;
+
+DROP TABLE IF EXISTS authors;
+DROP SEQUENCE IF EXISTS authors_id_seq;
+
+DROP TABLE IF EXISTS genres;
+DROP SEQUENCE IF EXISTS genres_id_seq;
