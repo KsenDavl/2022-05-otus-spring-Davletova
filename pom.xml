@@ -24,6 +24,7 @@
     <module>12-Spring-Security</module>
     <module>13-Spring-Security-Authorization</module>
     <module>16-Spring-Actuator</module>
+    <module>18-Hystrix</module>
   </modules>
 
   <properties>

@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otus?library
+    username: postgres
+    password: postgres
+    hikari:
+      schema: library
+      driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: "classpath:db/changelog-master.xml"
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/otus?current_schema=library
+    password: postgres
+    user: postgres
+    default-schema: library
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  file:
+    path: ./application.log
+  logback:
+    rollingpolicy:
+      clean-history-on-start: true
+
+hystrix:
+  command:
+    bookKey:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
+
