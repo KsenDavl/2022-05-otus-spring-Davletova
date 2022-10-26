@@ -1,0 +1,7 @@
+db.library.runCommand(
+    {
+        insert: "books",
+        documents: [ { title: "Onegin", mongoAuthor: { lastName: "Pushkin", firstName: "Alex" }, mongoGenre: {name: "comedy"}, _class: "ru.otus.spring.davlks.entity.MongoBook", mongoComments: [{text: "cool"}, {text: "like it"}] },
+            {title: "It", mongoAuthor: { lastName: "King", firstName: "Stephen" }, mongoGenre: { name: "love" }, _class: "ru.otus.spring.davlks.entity.MongoBook", mongoComments: [{text: "not to my liking"}, {text: "quite interesting"}]} ]
+    }
+    );
