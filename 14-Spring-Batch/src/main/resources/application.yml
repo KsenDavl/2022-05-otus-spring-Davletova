@@ -1,0 +1,30 @@
+spring:
+  main:
+    allow-circular-references: true
+  data:
+    mongodb:
+      database: library
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otus?library
+    username: postgres
+    password: postgres
+    hikari:
+      schema: library
+
+  liquibase:
+    change-log: "classpath:db/changelog-master.xml"
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/otus?current_schema=library
+    password: postgres
+    user: postgres
+    driver-class-name: org.postgresql.Driver
+    default-schema: library
+
+  jpa:
+    generate-ddl: false
+
+  batch:
+    initialize-schema: always
+    job:
+      enabled: false

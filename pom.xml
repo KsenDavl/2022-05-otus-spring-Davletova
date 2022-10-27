@@ -23,6 +23,7 @@
     <module>10-Spring-AJAX</module>
     <module>12-Spring-Security</module>
     <module>13-Spring-Security-Authorization</module>
+    <module>14-Spring-Batch</module>
     <module>16-Spring-Actuator</module>
   </modules>
 
