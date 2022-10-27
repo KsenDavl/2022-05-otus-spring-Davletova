@@ -21,6 +21,7 @@
     <module>08-Mongo-DB</module>
     <module>09-Spring-MVC-View</module>
     <module>10-Spring-AJAX</module>
+    <module>11-Spring-WebFlux</module>
     <module>12-Spring-Security</module>
     <module>13-Spring-Security-Authorization</module>
     <module>14-Spring-Batch</module>
