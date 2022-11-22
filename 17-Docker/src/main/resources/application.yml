@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/otus?library
+    username: postgres
+    password: postgres
+    hikari:
+      schema: library
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
